@@ -175,48 +175,45 @@ class TimerState extends State<SimpleTimer>
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Align(
             alignment: FractionalOffset.center,
-            child: AspectRatio(
-              aspectRatio: 1.0,
-              child: Stack(
-                children: <Widget>[
-                  widget.displayProgressIndicator
-                      ? AnimatedBuilder(
-                          animation: controller,
-                          builder: (context, _) {
-                            return CustomPaint(
-                              size: MediaQuery.of(context).size,
-                              painter: TimerPainter(
-                                  animation: controller,
-                                  timerStyle: widget.timerStyle,
-                                  progressIndicatorDirection:
-                                      widget.progressIndicatorDirection,
-                                  progressIndicatorColor:
-                                      widget.progressIndicatorColor,
-                                  backgroundColor: widget.backgroundColor,
-                                  startAngle: widget.startAngle,
-                                  strokeWidth: widget.strokeWidth),
-                            );
-                          },
-                        )
-                      : Container(),
-                  widget.displayProgressText
-                      ? Container(
-                          child: Align(
-                            alignment: FractionalOffset.center,
-                            child: FittedBox(
-                              fit: BoxFit.scaleDown,
-                              child: AnimatedBuilder(
-                                  animation: controller,
-                                  builder: (context, child) {
-                                    return Text(getProgressText(),
-                                        style: getProgressTextStyle());
-                                  }),
-                            ),
+            child: Stack(
+              children: <Widget>[
+                widget.displayProgressIndicator
+                    ? AnimatedBuilder(
+                        animation: controller,
+                        builder: (context, _) {
+                          return CustomPaint(
+                            size: MediaQuery.of(context).size,
+                            painter: TimerPainter(
+                                animation: controller,
+                                timerStyle: widget.timerStyle,
+                                progressIndicatorDirection:
+                                    widget.progressIndicatorDirection,
+                                progressIndicatorColor:
+                                    widget.progressIndicatorColor,
+                                backgroundColor: widget.backgroundColor,
+                                startAngle: widget.startAngle,
+                                strokeWidth: widget.strokeWidth),
+                          );
+                        },
+                      )
+                    : Container(),
+                widget.displayProgressText
+                    ? Container(
+                        child: Align(
+                          alignment: FractionalOffset.center,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: AnimatedBuilder(
+                                animation: controller,
+                                builder: (context, child) {
+                                  return Text(getProgressText(),
+                                      style: getProgressTextStyle());
+                                }),
                           ),
-                        )
-                      : Container()
-                ],
-              ),
+                        ),
+                      )
+                    : Container()
+              ],
             )));
   }
 
